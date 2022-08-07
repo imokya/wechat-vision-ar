@@ -1,0 +1,1 @@
+<view class="marker"><canvas type="webgl" id="webgl" style="{{'width:' + a + ';' + ('height:' + b)}}"></canvas></view>

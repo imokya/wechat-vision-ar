@@ -1,0 +1,29 @@
+{
+  "pages": [
+    "pages/marker/marker",
+    "pages/index/index"
+  ],
+  "window": {
+    "navigationBarTextStyle": "black",
+    "navigationBarTitleText": "Wechat Vision AR",
+    "navigationBarBackgroundColor": "#F8F8F8",
+    "backgroundColor": "#F8F8F8"
+  },
+  "tabBar": {
+    "color": "#7A7E83",
+    "selectedColor": "#3cc51f",
+    "borderStyle": "black",
+    "backgroundColor": "#ffffff",
+    "list": [
+      {
+        "pagePath": "pages/index/index",
+        "text": "模型AR"
+      },
+      {
+        "pagePath": "pages/marker/marker",
+        "text": "图像识别AR"
+      }
+    ]
+  },
+  "usingComponents": {}
+}

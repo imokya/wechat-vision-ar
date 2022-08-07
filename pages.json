@@ -1,0 +1,38 @@
+{
+	"pages": [ //pages数组中第一项表示应用启动页，参考：https://uniapp.dcloud.io/collocation/pages
+		{
+		  "path" : "pages/marker/marker",
+		  "style" :                                                                                    
+		  {
+		    "navigationBarTitleText": "图像识别AR",
+		    "enablePullDownRefresh": false
+		  }
+		},
+    {
+			"path": "pages/index/index",
+			"style": {
+				"navigationBarTitleText": "模型AR"
+			}
+		}
+  ],
+	"globalStyle": {
+		"navigationBarTextStyle": "black",
+		"navigationBarTitleText": "Wechat Vision AR",
+		"navigationBarBackgroundColor": "#F8F8F8",
+		"backgroundColor": "#F8F8F8"
+	},
+  "tabBar": {
+  	"color": "#7A7E83",
+  	"selectedColor": "#3cc51f",
+  	"borderStyle": "black",
+  	"backgroundColor": "#ffffff",
+  	"list": [{
+  		"pagePath": "pages/index/index",
+  		"text": "模型AR"
+  	}, {
+  		"pagePath": "pages/marker/marker",
+  		"text": "图像识别AR"
+  	}]
+  },
+	"uniIdRouter": {}
+}

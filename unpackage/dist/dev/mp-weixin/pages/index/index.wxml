@@ -1,0 +1,1 @@
+<view class="home"><block wx:if="{{r0}}"><canvas type="webgl" id="webgl" style="{{'width:' + a + ';' + ('height:' + b)}}" bindtouchend="{{c}}"></canvas></block></view>
