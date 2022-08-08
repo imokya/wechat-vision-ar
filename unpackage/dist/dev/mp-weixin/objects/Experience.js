@@ -2,15 +2,11 @@
 var common_vendor = require("../common/vendor.js");
 var objects_useThree = require("./useThree.js");
 var objects_loaders_gltfClone = require("./loaders/gltf-clone.js");
+var objects_GL = require("./GL.js");
 const NEAR = 0.1;
 const FAR = 1e3;
-let instance = null;
 class Experience {
   constructor(canvas) {
-    if (instance) {
-      return instance;
-    }
-    instance = this;
     this.canvas = canvas;
     this.initTHREE();
     this.initVisionKit();
@@ -74,12 +70,18 @@ class Experience {
     this.renderer.state.setCullFace(this.THREE.CullFaceNone);
   }
   initTHREE() {
-    const { camera, scene, renderer, GL, THREE, destroy } = objects_useThree.useThree(this.canvas);
+    const {
+      camera,
+      scene,
+      renderer,
+      THREE,
+      destroy
+    } = objects_useThree.useThree(this.canvas);
     this.THREE = THREE;
     this.camera = camera;
     this.scene = scene;
     this.renderer = renderer;
-    this.GL = GL;
+    this.GL = new objects_GL.GL(renderer);
     this.threeDestroy = destroy;
     this.initLights();
   }
@@ -145,11 +147,16 @@ class Experience {
     }
   }
   destroy() {
-    threeDestroy();
+    this.threeDestroy();
     this.THREE = null;
     this.camera = null;
     this.scene = null;
     this.session = null;
+    if (this.mixers) {
+      this.mixers.forEach((mixer) => mixer.uncacheRoot(mixer.getRoot()));
+      this.mixers = null;
+    }
+    this.canvas = null;
   }
 }
 exports.Experience = Experience;

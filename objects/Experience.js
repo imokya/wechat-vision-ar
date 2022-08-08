@@ -1,25 +1,21 @@
-import { useThree } from '@/objects/useThree'
+import {
+  useThree
+} from '@/objects/useThree'
 import cloneGltf from '@/objects/loaders/gltf-clone'
+import GL from '@/objects/GL'
 
 const NEAR = 0.1
 const FAR = 1000
 
-let instance = null
-
 export default class Experience {
-  
+
   constructor(canvas) {
-    
-    if(instance) {
-      return instance
-    }
-    instance = this
-    
+
     this.canvas = canvas
     this.initTHREE()
     this.initVisionKit()
   }
-  
+
   initVisionKit() {
     this.session = uni.createVKSession({
       track: {
@@ -33,7 +29,7 @@ export default class Experience {
     this.session.start(err => {
       if (err) return console.error('VK error: ', err)
       console.log('@@@@@@@@ VKSession.version', this.session.version)
-      
+
       const loader = new this.THREE.GLTFLoader()
       loader.load('https://www.xinapp.net/models/running2.glb', gltf => {
         this.model = {
@@ -41,17 +37,17 @@ export default class Experience {
           animations: gltf.animations,
         }
         gltf.scene.traverse(child => {
-          if(child.material) {
+          if (child.material) {
             child.material.transparent = false
             child.material.depthTest = true
             child.material.side = this.THREE.FrontSide
           }
         })
       })
-      
-      
+
+
       this.clock = new this.THREE.Clock()
-      const onFrame = timestamp => {     
+      const onFrame = timestamp => {
         const frame = this.session.getVKFrame(this.canvas.width, this.canvas.height)
         if (frame) {
           this.render(frame)
@@ -61,7 +57,7 @@ export default class Experience {
       this.session.requestAnimationFrame(onFrame)
     })
   }
-  
+
   render(frame) {
     this.GL.render(frame)
     const camera = frame.camera
@@ -85,28 +81,34 @@ export default class Experience {
     this.renderer.state.setCullFace(this.THREE.CullFaceNone)
 
   }
-  
+
   initTHREE() {
-    const { camera, scene, renderer, GL, THREE, destroy } = useThree(this.canvas)
+    const {
+      camera,
+      scene,
+      renderer,
+      THREE,
+      destroy
+    } = useThree(this.canvas)
     this.THREE = THREE
     this.camera = camera
     this.scene = scene
     this.renderer = renderer
-    this.GL = GL
+    this.GL = new GL(renderer)
     this.threeDestroy = destroy
     this.initLights()
   }
-  
+
   initLights() {
-    
-    const light1 = new this.THREE.HemisphereLight(0xffffff, 0x444444) 
+
+    const light1 = new this.THREE.HemisphereLight(0xffffff, 0x444444)
     light1.position.set(0, 0.2, 0)
     this.scene.add(light1)
-    const light2 = new this.THREE.DirectionalLight(0xffffff) 
+    const light2 = new this.THREE.DirectionalLight(0xffffff)
     light2.position.set(0, 0.2, 0.1)
     this.scene.add(light2)
   }
-  
+
   copyModel() {
     const THREE = this.THREE
     const {
@@ -130,7 +132,7 @@ export default class Experience {
     scene._mixer = mixer
     return scene
   }
-  
+
   getModel() {
     const THREE = this.THREE
 
@@ -153,7 +155,7 @@ export default class Experience {
     }
     return model
   }
-  
+
   addModel(x, y) {
     if (this.session && this.scene && this.model) {
       const info = uni.getSystemInfoSync()
@@ -167,13 +169,19 @@ export default class Experience {
       }
     }
   }
-  
+
+
   destroy() {
-    threeDestroy()
+    this.threeDestroy()
     this.THREE = null
     this.camera = null
     this.scene = null
     this.session = null
+    if (this.mixers) {
+      this.mixers.forEach(mixer => mixer.uncacheRoot(mixer.getRoot()))
+      this.mixers = null
+    }
+    this.canvas = null
   }
 
 }

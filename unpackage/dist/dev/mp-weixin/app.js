@@ -3,8 +3,9 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports[Symbol.toStringTag] = "Module";
 var common_vendor = require("./common/vendor.js");
 if (!Math) {
-  "./pages/marker/marker.js";
   "./pages/index/index.js";
+  "./pages/face/face.js";
+  "./pages/marker/marker.js";
 }
 const _sfc_main = {
   onLaunch: function() {
@@ -17,7 +18,7 @@ const _sfc_main = {
     console.log("App Hide");
   }
 };
-var App = /* @__PURE__ */ common_vendor._export_sfc(_sfc_main, [["__file", "C:/Users/Administrator/Desktop/wechat-vision-ar/wechat-vision-ar/App.vue"]]);
+var App = /* @__PURE__ */ common_vendor._export_sfc(_sfc_main, [["__file", "C:/Users/david.xing/Desktop/wechat-vision-ar/App.vue"]]);
 function createApp() {
   const app = common_vendor.createSSRApp(App);
   return {

@@ -1,7 +1,8 @@
 {
   "pages": [
-    "pages/marker/marker",
-    "pages/index/index"
+    "pages/index/index",
+    "pages/face/face",
+    "pages/marker/marker"
   ],
   "window": {
     "navigationBarTextStyle": "black",
@@ -17,11 +18,15 @@
     "list": [
       {
         "pagePath": "pages/index/index",
-        "text": "模型AR"
+        "text": "模型加载"
       },
       {
         "pagePath": "pages/marker/marker",
-        "text": "图像识别AR"
+        "text": "图像识别"
+      },
+      {
+        "pagePath": "pages/face/face",
+        "text": "人脸检测"
       }
     ]
   },

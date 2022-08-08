@@ -3,8 +3,8 @@ var common_vendor = require("../../common/vendor.js");
 var objects_Experience = require("../../objects/Experience.js");
 require("../../objects/useThree.js");
 require("../../objects/loaders/gltf-loader.js");
-require("../../objects/GL.js");
 require("../../objects/loaders/gltf-clone.js");
+require("../../objects/GL.js");
 const _sfc_main = {
   __name: "index",
   setup(__props) {
@@ -28,6 +28,9 @@ const _sfc_main = {
         experience = new objects_Experience.Experience(canvas);
       });
     });
+    common_vendor.onUnmounted(() => {
+      experience.destroy();
+    });
     return (_ctx, _cache) => {
       return {
         a: common_vendor.unref(cw) + "px",
@@ -37,5 +40,5 @@ const _sfc_main = {
     };
   }
 };
-var MiniProgramPage = /* @__PURE__ */ common_vendor._export_sfc(_sfc_main, [["__file", "C:/Users/Administrator/Desktop/wechat-vision-ar/wechat-vision-ar/pages/index/index.vue"]]);
+var MiniProgramPage = /* @__PURE__ */ common_vendor._export_sfc(_sfc_main, [["__file", "C:/Users/david.xing/Desktop/wechat-vision-ar/pages/index/index.vue"]]);
 wx.createPage(MiniProgramPage);

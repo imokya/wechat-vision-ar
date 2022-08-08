@@ -6,7 +6,7 @@
 
 <script setup>
 import Experience from '@/objects/MarkerExperience'
-import { onMounted } from 'vue'
+import { onMounted, onUnmounted } from 'vue'
 
 const info = uni.getSystemInfoSync()
 const cw = info.windowWidth
@@ -24,6 +24,9 @@ onMounted(() => {
   })
 })
 
+onUnmounted(() => {
+  experience.destroy()
+})
   
 </script>
 

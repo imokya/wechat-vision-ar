@@ -6,7 +6,7 @@
 
 <script setup>
 import Experience from '@/objects/Experience'
-import { onMounted } from 'vue'
+import { onMounted, onUnmounted } from 'vue'
 
 const info = uni.getSystemInfoSync()
 const cw = info.windowWidth
@@ -30,6 +30,10 @@ onMounted(() => {
     canvas.height = ch * pixelRatio / 2
     experience = new Experience(canvas)
   })
+})
+
+onUnmounted(() => {
+  experience.destroy()
 })
 
 

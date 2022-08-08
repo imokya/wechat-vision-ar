@@ -3,21 +3,16 @@ import {
 } from '@/objects/useThree'
 import cloneGltf from '@/objects/loaders/gltf-clone'
 import Marker from '@/objects/Marker'
+import GL from '@/objects/GL'
 
 const NEAR = 0.1
 const FAR = 1000
 
-let instance = null
 let DEBUG_SIZE = true
 
 export default class MarkerExperience {
 
   constructor(canvas) {
-
-    if (instance) {
-      return instance
-    }
-    instance = this
 
     this.canvas = canvas
 
@@ -180,7 +175,6 @@ export default class MarkerExperience {
       camera,
       scene,
       renderer,
-      GL,
       THREE,
       destroy
     } = useThree(this.canvas)
@@ -188,7 +182,7 @@ export default class MarkerExperience {
     this.camera = camera
     this.scene = scene
     this.renderer = renderer
-    this.GL = GL
+    this.GL = new GL(renderer)
     this.threeDestroy = destroy
     this.initLights()
   }
@@ -265,7 +259,7 @@ export default class MarkerExperience {
   }
 
   destroy() {
-    threeDestroy()
+    this.threeDestroy()
     this.THREE = null
     this.camera = null
     this.scene = null
