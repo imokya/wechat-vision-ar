@@ -226,6 +226,7 @@ class MarkerExperience {
     this.camera = null;
     this.scene = null;
     this.session = null;
+    this.GL.destroy();
   }
 }
 exports.MarkerExperience = MarkerExperience;

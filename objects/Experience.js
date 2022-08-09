@@ -172,16 +172,17 @@ export default class Experience {
 
 
   destroy() {
+    if (this.mixers) {
+      this.mixers.forEach(mixer => mixer.uncacheRoot(mixer.getRoot()))
+      this.mixers = null
+    }
     this.threeDestroy()
     this.THREE = null
     this.camera = null
     this.scene = null
     this.session = null
-    if (this.mixers) {
-      this.mixers.forEach(mixer => mixer.uncacheRoot(mixer.getRoot()))
-      this.mixers = null
-    }
     this.canvas = null
+    this.GL.destroy()
   }
 
 }
