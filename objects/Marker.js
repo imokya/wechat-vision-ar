@@ -31,7 +31,7 @@ export default class Marker {
     const fs = uni.getFileSystemManager()
 
     uni.downloadFile({
-      url: 'https://www.xinapp.net/markers/logo2.png',
+      url: 'https://www.xinapp.net/markers/logo.png',
       success: res => {
         fs.saveFile({
           filePath,

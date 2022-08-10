@@ -26,7 +26,7 @@ class Marker {
     console.log("before filepath", filePath);
     const fs = common_vendor.index.getFileSystemManager();
     common_vendor.index.downloadFile({
-      url: "https://www.xinapp.net/markers/logo2.png",
+      url: "https://www.xinapp.net/markers/logo.png",
       success: (res) => {
         fs.saveFile({
           filePath,
